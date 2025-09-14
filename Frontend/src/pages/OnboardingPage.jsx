@@ -88,7 +88,7 @@ const OnboardingPage = () => {
               {/* FULL NAME  */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Full-Name</span>
+                  <span className="label-text">Full Name</span>
                 </label>
                 <input
                   type="text"
@@ -108,7 +108,7 @@ const OnboardingPage = () => {
                 <textarea
                 name="bio"
                 value={formState.bio}
-                onChange={(e) => setFormState({...formState, bio: e.target.value})}
+                onChange={(e) => setFormState({...formState, bio:e.target.value})}
                 className="textArea textArea-bordered h-20"
                 placeholder="Tell about yourself and your learning goals"
                 />
@@ -124,7 +124,7 @@ const OnboardingPage = () => {
                   <select
                   name="nativeLanguage"
                   value={formState.nativeLanguage}
-                  onChange={(e) => setFormState({...formState, nativeLanguage: e.target.value })
+                  onChange={(e) => setFormState({...formState, nativeLanguage:e.target.value })
                   }
                   className="select select-bordered w-full"
                   >
@@ -146,7 +146,7 @@ const OnboardingPage = () => {
                   <select 
                   name="learningLanguage"
                   value={formState.learningLanguage} 
-                  onChange={(e) => setFormState({...formState, learningLanguage: e.target.value })}
+                  onChange={(e) => setFormState({...formState, learningLanguage:e.target.value })}
                   className="select select-bordered w-full">
                     <option value="">Select Language you're learning</option>
                     {LANGUAGES.map((lang) =>(
