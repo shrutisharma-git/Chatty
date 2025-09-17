@@ -1,4 +1,3 @@
-import React from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 import HomePage from './pages/HomePage.jsx'
 import SignUpPage from './pages/SignupPage.jsx'
@@ -10,7 +9,8 @@ import CallPage from './pages/CallPage.jsx'
 
 import  { Toaster } from 'react-hot-toast'
 import PageLoader from './components/PageLoader.jsx'
-import useAuthUser from './components/hooks/useAuthUser.js'
+import useAuthUser from './hooks/useAuthUser.js'
+import Layout from './components/Layout.jsx'
 
 
 const App = () => {
@@ -26,13 +26,25 @@ const App = () => {
     <div className=' h-screen' data-theme = "synthwave">
 
       <Routes>
-        <Route path='/' element = {isAuthenticated && isOnboarded ? (
-          <HomePage/>
+        <Route path='/' 
+        element = {
+          isAuthenticated && isOnboarded ? (
+          <Layout showSidebar = {true}>
+            <HomePage/>
+          </Layout>
         ) : (
           <Navigate to={!isAuthenticated ? "/login" : "/onboarding"}/>
         ) }/>
-        <Route path='/signup' element = {!isAuthenticated ? <SignUpPage /> : <Navigate to ="/"/>}/>
-        <Route path='/login' element = {!isAuthenticated?<LoginPage /> : <Navigate to ="/"/>}/>
+        <Route path="/signup"
+         element = {
+          !isAuthenticated ? <SignUpPage /> : <Navigate to ={isOnboarded ?"/" :"/onboarding"}/>
+          }
+          />
+        <Route path= "/login" 
+        element = {
+          !isAuthenticated? <LoginPage /> : <Navigate to ={isOnboarded ?"/" :"/onboarding"}/>
+          }
+          />
         <Route 
         path='/onboarding' 
         element = {isAuthenticated ? (

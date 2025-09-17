@@ -1,5 +1,5 @@
 import { CameraIcon, LoaderIcon, MapPinIcon, ShipWheelIcon, ShuffleIcon } from "lucide-react";
-import useAuthUser from "../components/hooks/useAuthUser";
+import useAuthUser from "../hooks/useAuthUser.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { completeOnboarding } from "../lib/api";
@@ -52,7 +52,7 @@ const OnboardingPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-base-100 flex items-center justify-center p-5">
+    <div className="min-h-screen bg-base-100 flex items-center justify-center p-5" data-theme="synthwave">
       <div className="card border-white card-bordered bg-base-200 w-full max-w-2xl shadow-xl">
         <div className="card-body p-6 sm:p-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Complete Your Profile</h1>
