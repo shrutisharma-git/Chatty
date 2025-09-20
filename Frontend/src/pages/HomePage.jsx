@@ -100,7 +100,6 @@ const HomePage = () => {
                 const hasRequestBeenSent = outgoingRequestsIds.has(user._id);
 
                 return(
-
                   <div key={user._id}
                   className="card bg-base-200 hover:shadow-lg transition-all duration-300"
                   >
