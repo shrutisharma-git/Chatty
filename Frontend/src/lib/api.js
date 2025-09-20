@@ -25,7 +25,7 @@ export const getAuthUser = async() =>{
 };
 
 export const completeOnboarding = async(userData) => {
-  const response =  await axiosInstance.post('/auth/onboarding');
+  const response =  await axiosInstance.post('/auth/onboarding', userData);
   return response.data;
 }
 export async function getUserFriends() {
@@ -48,3 +48,4 @@ export async function sendFriendRequest(userId) {
   const response = await axiosInstance.post(`/users/friend-request/ ${userId}`);
   return response.data;
 }
+
