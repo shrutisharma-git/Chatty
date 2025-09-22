@@ -40,20 +40,23 @@ export async function sendFriendRequest(req,res){
 
     try {
         const myId = req.user.id;
-        const{id: recipientId} = req.params
+        // console.log(req.user)
+        const { id: recipientId } = req.params
+        // console.log(recipientId)
 
-        //prevent req to yourself
+        //prevent send req to yourself
         if(myId==recipientId){
             return res.status(400).json({message : "You can't send friend request to yourself"});
         }
 
         const recipient = await User.findById(recipientId)
+        // console.log(recipient)
         if(!recipient){
             return res.status(404).json({message : "Recipient not found"});
         }
 
         // check if user is already friend
-        if(recipient.friend.includes(myId)){
+        if(recipient.friends.includes(myId)){
             return res.status(400).json({message : "You are already firend with this user"});
         }
 
@@ -65,15 +68,18 @@ export async function sendFriendRequest(req,res){
             ],
 
         });
+        
         if(existingRequest){
             return res
-            .status(400).json({message : "a friend request already exists between you and this user"});
+            .status(400)
+            .json({message : "a friend request already exists between you and this user"});
         }
 
         const friendRequest = await FriendRequest.create({
             sender : myId,
             recipient : recipientId,
         });
+        // console.log("frintrgberiuber", friendRequest)
 
         res.status(201).json(friendRequest);
 

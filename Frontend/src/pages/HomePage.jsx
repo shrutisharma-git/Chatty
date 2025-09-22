@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect, useState } from "react";
 import { getOutgoingFriendReqs, getRecommendedUsers, getUserFriends, sendFriendRequest } from "../lib/api";
-import { CheckCircleIcon, Link, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
+import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 import FriendCard from "../components/FriendCard.jsx";
 import NoFriendsFound from "../components/NoFriendsFound.jsx";
@@ -27,9 +27,17 @@ const HomePage = () => {
     queryFn: getOutgoingFriendReqs,
   });
 
+  // const {mutate: sendRequestMutation, isPending } = useMutation({
+  //   mutationFn: sendFriendRequest,
+  //   onSuccess: () => queryClient.invalidateQueries({queryKey: ["outgoingFriendReqs"] }),
+  // });
   const {mutate: sendRequestMutation, isPending } = useMutation({
-    mutationFn: sendFriendRequest,
-    onSuccess: () => queryClient.invalidateQueries({queryKey: ["outgoingFriendReqs"] }),
+      mutationFn: sendFriendRequest,
+      onSuccess: () => {
+          queryClient.invalidateQueries({queryKey: ["outgoingFriendReqs"]});
+          // Add this line to update the local state
+          setHasRequestBeenSent(true);
+      },
   });
 
   useEffect(() => {
@@ -104,7 +112,9 @@ const HomePage = () => {
                 const hasRequestBeenSent = outgoingRequestsIds.has(user._id);
 
                 return (
-                  <div key={user._id} className="card bg-base-200 hover:shadow-lg transition-all duration-300">
+                  <div 
+                  key={user._id} 
+                  className="card bg-base-200 hover:shadow-lg transition-all duration-300">
                     <div className="card-body p-5 space-y-4">
                       <div className="flex items-center gap-3">
                         <div className="avatar size-16 rounded-full">
@@ -134,11 +144,13 @@ const HomePage = () => {
                       </div>
 
                       {user.bio && <p className="text-sm opacity-70">{user.bio}</p>}
-
+                      
+                      {/* ACTION BUTTON */}
+                      
                       <button
                         className={`btn w-full mt-2 ${
                           hasRequestBeenSent ? "btn-disabled" : "btn-primary"
-                        }`}
+                        } `}
                         onClick={() => sendRequestMutation(user._id)}
                         disabled={hasRequestBeenSent || isPending}
                       >
