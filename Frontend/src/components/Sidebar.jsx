@@ -7,7 +7,7 @@ const Sidebar = () => {
     const {authUser} = useAuthUser();
     const location = useLocation();
     const currentPath = location.pathname;
-  return <aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
+  return (<aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
     <div className="p-5 border-b border-base-300">
         <Link to="/" className="flex items-center gap-2.5">
         <SmilePlus className='size-9 text-primary'/>
@@ -68,7 +68,7 @@ const Sidebar = () => {
       </div>
     </div>
   </aside>
-  
+  ); 
 };
 
-export default Sidebar
+export default Sidebar;

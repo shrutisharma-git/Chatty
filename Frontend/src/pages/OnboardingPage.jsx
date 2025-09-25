@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { completeOnboarding } from "../lib/api";
 import { LANGUAGES } from "../constants";
-import  { toast,Toaster } from 'react-hot-toast'
+import  { toast } from 'react-hot-toast'
 import {useNavigate } from "react-router";
 
 
