@@ -1,4 +1,3 @@
-import React from 'react'
 import { LANGUAGE_TO_FLAG } from '../constants';
 import { Link } from 'react-router';
 
@@ -10,9 +9,9 @@ const FriendCard = ({friend}) => {
         {/* USER INFO */}
         <div className='flex items-center gap-3 mb-3'></div>
         <div className='avatar size-12'>
-            <img src={FriendCard.profilePic} alt={FriendCard.fullName} />
+            <img src={friend.profilePic} alt={friend.fullName} />
         </div>
-        <h3 className='font-semibold truncate'>{FriendCard.fullName}</h3>
+        <h3 className='font-semibold truncate'>{friend.fullName}</h3>
       </div>
 
       <div className='flex flex-wrap gap-1.5 mb-3'>
@@ -27,7 +26,7 @@ const FriendCard = ({friend}) => {
         </span>
       </div>
 
-      <Link to={`/chat/${friend._id}`} className='btn tn-outline w-full'>
+      <Link to={`/chat/${friend._id}`} className='btn btn-outline w-full'>
         Message
       </Link>
     </div>

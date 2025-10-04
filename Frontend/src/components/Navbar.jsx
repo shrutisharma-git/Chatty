@@ -10,7 +10,7 @@ const Navbar = () => {
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
 
-  const {logoutMutation, isPending, error} = useLogout();
+  const {logoutMutation} = useLogout();
 
 
   return <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
@@ -28,7 +28,7 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="flex items-center gap-3 sm:gap-4">
+      <div className="flex items-center gap-3 sm:gap-4 ml-auto">
         <Link to={"/notifications"} >
         <button className="btn btn-ghost btn-circle">
           <BellIcon className="h-6 w-6 text-base-contetnt opacity-70"/>
