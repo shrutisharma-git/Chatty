@@ -1,17 +1,18 @@
-import { Navigate, Route, Routes } from 'react-router'
-import HomePage from './pages/HomePage.jsx'
-import SignUpPage from './pages/SignupPage.jsx'
-import LoginPage from './pages/LoginPage.jsx'
-import OnboardingPage from './pages/OnboardingPage.jsx'
-import NotificationPage from './pages/NotificationPage.jsx'
-import ChatPage from './pages/ChatPage.jsx'
-import CallPage from './pages/CallPage.jsx'
+import { Navigate, Route, Routes } from 'react-router';
+
+import HomePage from './pages/HomePage.jsx';
+import SignUpPage from './pages/SignupPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import OnboardingPage from './pages/OnboardingPage.jsx';
+import NotificationPage from './pages/NotificationPage.jsx';
+import ChatPage from './pages/ChatPage.jsx';
+import CallPage from './pages/CallPage.jsx';
 
 import  { Toaster } from 'react-hot-toast'
 import PageLoader from './components/PageLoader.jsx'
 import useAuthUser from './hooks/useAuthUser.js'
 import Layout from './components/Layout.jsx'
-import { useThemeStore } from './hooks/useThemeStore.js'
+import { useThemeStore } from './store/useThemeStore.js'
 
 
 const App = () => {
@@ -28,7 +29,8 @@ const App = () => {
     <div className=' h-screen' data-theme = {theme}>
 
       <Routes>
-        <Route path='/' 
+        <Route 
+        path='/' 
         element = {
           isAuthenticated && isOnboarded ? (
           <Layout showSidebar = {true}>

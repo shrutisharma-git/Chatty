@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+    {
     fullName : {
         type : String,
-        required : true
+        required : true,
     },
 
     email : {
         type : String,
         required : true,
-        unique : true
+        unique : true,
     },
 
     password : {
@@ -21,24 +22,24 @@ const userSchema = new mongoose.Schema({
 
     bio : {
         type : String,
-        default : ""
+        default : "",
     },
 
     profilePic : {
         type : String,
-        default : ""
+        default : "",
     },
     nativeLanguage : {
         type : String,
-        default : ""
+        default : "",
     },
     learningLanguage : {
         type : String,
-        default : ""
+        default : "",
     },
     location : {
         type : String,
-        default : ""
+        default : "",
     },
 
     isOnboarded : {

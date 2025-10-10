@@ -40,7 +40,7 @@ const CallPage = () => {
   useEffect(() => {
     const initCall = async () => {
       if(!tokenData.token || !authUser || !callId ) return;
-
+      console.log(tokenData)
       try {
 
         console.log("Initiallizing stream video client...");

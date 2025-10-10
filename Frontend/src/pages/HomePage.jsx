@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect, useState } from "react";
-import { getOutgoingFriendReqs, getRecommendedUsers, getUserFriends, sendFriendRequest } from "../lib/api";
+import { 
+  getOutgoingFriendReqs, 
+  getRecommendedUsers, 
+  getUserFriends, 
+  sendFriendRequest 
+} from "../lib/api";
 import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import { Link} from "react-router";
 import FriendCard from "../components/FriendCard.jsx";
@@ -11,11 +16,10 @@ const HomePage = () => {
   const queryClient = useQueryClient();
   const [outgoingRequestsIds, setOutgoingRequestsIds] = useState(new Set());
   
-
   const {data: friends = [], isLoading: loadingFriends} = useQuery({
     queryKey: ["friends"],
     queryFn: getUserFriends,
-  })
+  });
 
   const {data: recommendedUsers = [], isLoading: loadingUsers} = useQuery({
     queryKey: ["user"],

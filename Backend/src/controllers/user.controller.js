@@ -22,7 +22,7 @@ export async function getRecommendedUsers(req,res) {
     }
 }
 
-export async function getMyfriends(req,res){
+export async function getMyFriends(req,res){
     try {
         const user = await User.findById(req.user.id)
         .select("friends")
@@ -30,7 +30,7 @@ export async function getMyfriends(req,res){
 
         res.status(200).json(user.friends);
     } catch (error) {
-        console.error("Error in getMyFriends controller",error);
+        console.error("Error in getMyFriends controller",error.message);
         res.status(500).json({message : "Internal server error"});
     }
 
@@ -45,7 +45,7 @@ export async function sendFriendRequest(req,res){
         // console.log(recipientId)
 
         //prevent send req to yourself
-        if(myId==recipientId){
+        if(myId === recipientId){
             return res.status(400).json({message : "You can't send friend request to yourself"});
         }
         
