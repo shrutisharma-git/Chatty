@@ -27,13 +27,30 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/chat", chatRoutes);
 
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname,"../frontend/dist")));
+const frontendDistPath = path.join(__dirname, "..", "Frontend", "dist");
 
-    app.get("*", (req,res)=>{
-        res.sendFile(path.join(__dirname,"../frontend", "dist", "index.html"));
-    })
+if(process.env.NODE_ENV === "production"){
+    // Verify if the dist directory exists
+    try {
+        // Serve static files
+        app.use(express.static(frontendDistPath));
+
+        // Handle client-side routing
+        app.get("*", (req, res) => {
+            res.sendFile(path.join(frontendDistPath, "index.html"));
+        });
+    } catch (error) {
+        console.error("Error serving static files:", error);
+        app.get("*", (req, res) => {
+            res.status(500).send("Error loading application. Please check build files.");
+        });
+    }
 }
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);
