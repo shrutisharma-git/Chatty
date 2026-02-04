@@ -59,8 +59,8 @@ export async function signup(req,res){
         res.cookie("jwt",token,{
             maxAge : 7* 24 * 60 * 60 * 1000, // 7 days in milliseconds
             httpOnly : true, //prevents XSS attacks by not allowing client-side scripts to access the cookie
-            sameSite : "lax", //allows cookies in cross-site requests for development
-            secure : process.env.NODE_ENV === "production" //ensures the cookie is sent only over HTTPS in production
+            sameSite : "none", //allows cookies in cross-site requests for development
+            secure : true //ensures the cookie is sent only over HTTPS in production
         });
 
         res.status(201).json({
@@ -107,8 +107,8 @@ export async function login(req,res){
         res.cookie("jwt",token,{
             maxAge : 7* 24 * 60 * 60 * 1000, // 7 days in milliseconds
             httpOnly : true, //prevents XSS attacks by not allowing client-side scripts to access the cookie
-            sameSite : "lax", //allows cookies in cross-site requests for development
-            secure : process.env.NODE_ENV === "production" //ensures the cookie is sent only over HTTPS in production
+            sameSite : "none", //allows cookies in cross-site requests for development
+            secure : true //ensures the cookie is sent only over HTTPS in production
         });
 
         res.status(200).json({success : true, user});
@@ -124,7 +124,11 @@ export async function login(req,res){
 }
 
 export function logout(req,res){
-    res.clearCookie("jwt");
+    res.clearCookie("jwt", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
     res.status(200).json({success : true, message : "Logout Successfull"});
 }
 
