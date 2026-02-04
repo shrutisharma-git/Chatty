@@ -85,6 +85,8 @@ const ChatPage = () => {
       });
 
       toast.success("Video call link sent successfully!");
+      // redirect to that VC page in new tab
+      window.open(callUrl, "_blank");
     }
   };
   

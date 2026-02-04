@@ -17,9 +17,13 @@ const PORT = process.env.PORT;
 // const __dirname = path.resolve();
 
 app.use(cors({
-    origin : "http://localhost:5173",
-    credentials : true //allows frontend to send cookies
+    origin: [
+      "http://localhost:5173",          // local dev
+      process.env.CLIENT_URL            // production frontend
+    ],
+    credentials: true
 }));
+  
 app.use(express.json());
 app.use(cookieParser());
 
